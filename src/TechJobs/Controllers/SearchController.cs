@@ -13,7 +13,7 @@ namespace TechJobs.Controllers
             return View();
         }
 
-        // TODO #1 - Create a Results action method to process 
+        // Create a Results action method to process 
         // search request and display results
 
         public IActionResult Results(string searchType, string searchTerm)
@@ -32,7 +32,7 @@ namespace TechJobs.Controllers
             ViewBag.columns = ListController.columnChoices;
             ViewBag.title = "Search";
 
-            return View();
+            return View("Index");
         }
     }
 }
