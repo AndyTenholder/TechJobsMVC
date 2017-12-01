@@ -6,10 +6,13 @@ namespace TechJobs.Controllers
 {
     public class SearchController : Controller
     {
+        private static List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+
         public IActionResult Index()
         {
             ViewBag.columns = ListController.columnChoices;
             ViewBag.title = "Search";
+            ViewBag.jobs = jobs;
             return View();
         }
 
@@ -20,19 +23,14 @@ namespace TechJobs.Controllers
         {
             if (searchType == "all")
             {
-                List<Dictionary<string, string>> jobs = JobData.FindByValue(searchTerm);
-                ViewBag.jobs = jobs;
+                jobs = JobData.FindByValue(searchTerm);
             }
             else
             {
-                List<Dictionary<string, string>> jobs = JobData.FindByColumnAndValue(searchType,searchTerm);
-                ViewBag.jobs = jobs;
+                jobs = JobData.FindByColumnAndValue(searchType,searchTerm);
             }
 
-            ViewBag.columns = ListController.columnChoices;
-            ViewBag.title = "Search";
-
-            return View("Index");
+            return Redirect("/Search");
         }
     }
 }
